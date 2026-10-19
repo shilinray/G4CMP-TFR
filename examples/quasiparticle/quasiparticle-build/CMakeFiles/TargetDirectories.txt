@@ -1,0 +1,8 @@
+/sdf/home/s/shilin/mycode/TFR/G4CMP/examples/quasiparticle/quasiparticle-build/CMakeFiles/quasiparticleLib.dir
+/sdf/home/s/shilin/mycode/TFR/G4CMP/examples/quasiparticle/quasiparticle-build/CMakeFiles/g4cmpQuasiparticle.dir
+/sdf/home/s/shilin/mycode/TFR/G4CMP/examples/quasiparticle/quasiparticle-build/CMakeFiles/edit_cache.dir
+/sdf/home/s/shilin/mycode/TFR/G4CMP/examples/quasiparticle/quasiparticle-build/CMakeFiles/rebuild_cache.dir
+/sdf/home/s/shilin/mycode/TFR/G4CMP/examples/quasiparticle/quasiparticle-build/CMakeFiles/list_install_components.dir
+/sdf/home/s/shilin/mycode/TFR/G4CMP/examples/quasiparticle/quasiparticle-build/CMakeFiles/install.dir
+/sdf/home/s/shilin/mycode/TFR/G4CMP/examples/quasiparticle/quasiparticle-build/CMakeFiles/install/local.dir
+/sdf/home/s/shilin/mycode/TFR/G4CMP/examples/quasiparticle/quasiparticle-build/CMakeFiles/install/strip.dir
