@@ -7,13 +7,13 @@ set(CMAKE_DEPENDS_GENERATOR "Unix Makefiles")
 # The top level Makefile was generated from the following files:
 set(CMAKE_MAKEFILE_DEPENDS
   "CMakeCache.txt"
-  "/opt/cdms/release/cmake/G4CMPConfig.cmake"
-  "/opt/cdms/release/cmake/UseG4CMP.cmake"
-  "/opt/cdms/release/share/G4CMP/FindGeant4.cmake"
   "../CMakeLists.txt"
   "CMakeFiles/3.22.1/CMakeCCompiler.cmake"
   "CMakeFiles/3.22.1/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.22.1/CMakeSystem.cmake"
+  "/sdf/home/s/shilin/mycode/TFR/G4CMP_install/cmake/G4CMPConfig.cmake"
+  "/sdf/home/s/shilin/mycode/TFR/G4CMP_install/cmake/UseG4CMP.cmake"
+  "/sdf/home/s/shilin/mycode/TFR/G4CMP_install/share/G4CMP/FindGeant4.cmake"
   "/usr/lib/x86_64-linux-gnu/cmake/Qt5Core/Qt5CoreConfig.cmake"
   "/usr/lib/x86_64-linux-gnu/cmake/Qt5Core/Qt5CoreConfigExtras.cmake"
   "/usr/lib/x86_64-linux-gnu/cmake/Qt5Core/Qt5CoreConfigExtrasMkspecDir.cmake"

@@ -396,10 +396,10 @@ CMakeFiles/quasiparticleLib.dir/src/QuasiparticleActionInitialization.cc.o: \
  /usr/local/include/Geant4/globals.hh \
  /sdf/home/s/shilin/mycode/TFR/G4CMP/examples/quasiparticle/include/QuasiparticleSteppingAction.hh \
  /usr/local/include/Geant4/G4UserSteppingAction.hh \
- /opt/cdms/release/cmake/../include/G4CMP/G4CMPStackingAction.hh \
+ /sdf/home/s/shilin/mycode/TFR/G4CMP_install/cmake/../include/G4CMP/G4CMPStackingAction.hh \
  /usr/local/include/Geant4/G4UserStackingAction.hh \
  /usr/local/include/Geant4/G4ClassificationOfNewTrack.hh \
- /opt/cdms/release/cmake/../include/G4CMP/G4CMPProcessUtils.hh \
+ /sdf/home/s/shilin/mycode/TFR/G4CMP_install/cmake/../include/G4CMP/G4CMPProcessUtils.hh \
  /usr/local/include/Geant4/G4AffineTransform.hh \
  /usr/local/include/Geant4/G4RotationMatrix.hh \
  /usr/local/include/Geant4/G4ThreeVector.hh \
@@ -438,4 +438,5 @@ CMakeFiles/quasiparticleLib.dir/src/QuasiparticleActionInitialization.cc.o: \
  /usr/local/include/Geant4/G4StepPoint.icc \
  /usr/local/include/Geant4/G4TrackVector.hh \
  /usr/local/include/Geant4/G4Step.icc \
- /usr/local/include/Geant4/G4Track.hh
+ /usr/local/include/Geant4/G4Track.hh \
+ /usr/local/include/Geant4/G4VTouchable.hh

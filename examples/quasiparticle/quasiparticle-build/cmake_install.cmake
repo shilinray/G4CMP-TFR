@@ -47,15 +47,15 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
      NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libg4cmpQuasiparticle.so")
     file(RPATH_CHECK
          FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libg4cmpQuasiparticle.so"
-         RPATH "/sdf/home/s/shilin/mycode/TFR/G4CMP/examples/quasiparticle/quasiparticle-install/lib:/opt/cdms/release/lib:/usr/local/lib")
+         RPATH "/sdf/home/s/shilin/mycode/TFR/G4CMP/examples/quasiparticle/quasiparticle-install/lib:/sdf/home/s/shilin/mycode/TFR/G4CMP_install/lib:/usr/local/lib")
   endif()
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE SHARED_LIBRARY FILES "/sdf/home/s/shilin/mycode/TFR/G4CMP/examples/quasiparticle/quasiparticle-build/libg4cmpQuasiparticle.so")
   if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libg4cmpQuasiparticle.so" AND
      NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libg4cmpQuasiparticle.so")
     file(RPATH_CHANGE
          FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libg4cmpQuasiparticle.so"
-         OLD_RPATH "/opt/cdms/release/lib:/usr/local/lib:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"
-         NEW_RPATH "/sdf/home/s/shilin/mycode/TFR/G4CMP/examples/quasiparticle/quasiparticle-install/lib:/opt/cdms/release/lib:/usr/local/lib")
+         OLD_RPATH "/sdf/home/s/shilin/mycode/TFR/G4CMP_install/lib:/usr/local/lib:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"
+         NEW_RPATH "/sdf/home/s/shilin/mycode/TFR/G4CMP/examples/quasiparticle/quasiparticle-install/lib:/sdf/home/s/shilin/mycode/TFR/G4CMP_install/lib:/usr/local/lib")
     if(CMAKE_INSTALL_DO_STRIP)
       execute_process(COMMAND "/usr/bin/strip" "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libg4cmpQuasiparticle.so")
     endif()
@@ -70,15 +70,15 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
      NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/g4cmpQuasiparticle")
     file(RPATH_CHECK
          FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/g4cmpQuasiparticle"
-         RPATH "/sdf/home/s/shilin/mycode/TFR/G4CMP/examples/quasiparticle/quasiparticle-install/lib:/opt/cdms/release/lib:/usr/local/lib")
+         RPATH "/sdf/home/s/shilin/mycode/TFR/G4CMP/examples/quasiparticle/quasiparticle-install/lib:/sdf/home/s/shilin/mycode/TFR/G4CMP_install/lib:/usr/local/lib")
   endif()
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE EXECUTABLE FILES "/sdf/home/s/shilin/mycode/TFR/G4CMP/examples/quasiparticle/quasiparticle-build/g4cmpQuasiparticle")
   if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/g4cmpQuasiparticle" AND
      NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/g4cmpQuasiparticle")
     file(RPATH_CHANGE
          FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/g4cmpQuasiparticle"
-         OLD_RPATH "/sdf/home/s/shilin/mycode/TFR/G4CMP/examples/quasiparticle/quasiparticle-build:/opt/cdms/release/lib:/usr/local/lib::::::"
-         NEW_RPATH "/sdf/home/s/shilin/mycode/TFR/G4CMP/examples/quasiparticle/quasiparticle-install/lib:/opt/cdms/release/lib:/usr/local/lib")
+         OLD_RPATH "/sdf/home/s/shilin/mycode/TFR/G4CMP/examples/quasiparticle/quasiparticle-build:/sdf/home/s/shilin/mycode/TFR/G4CMP_install/lib:/usr/local/lib::::::"
+         NEW_RPATH "/sdf/home/s/shilin/mycode/TFR/G4CMP/examples/quasiparticle/quasiparticle-install/lib:/sdf/home/s/shilin/mycode/TFR/G4CMP_install/lib:/usr/local/lib")
     if(CMAKE_INSTALL_DO_STRIP)
       execute_process(COMMAND "/usr/bin/strip" "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/g4cmpQuasiparticle")
     endif()

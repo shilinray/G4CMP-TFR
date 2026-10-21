@@ -237,13 +237,16 @@ Fontconfig_INCLUDE_DIR:PATH=/usr/include
 Fontconfig_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libfontconfig.so
 
 //The directory containing a CMake configuration file for G4CMP.
-G4CMP_DIR:PATH=/opt/cdms/release/cmake
+G4CMP_DIR:PATH=/sdf/home/s/shilin/mycode/TFR/G4CMP_install/cmake
 
 //Path to a library.
-G4CMP_LIBRARY:FILEPATH=/opt/cdms/release/lib/libG4cmp.so
+G4CMP_LIBRARY:FILEPATH=/sdf/home/s/shilin/mycode/TFR/G4CMP_install/lib/libG4cmp.so
 
 //The directory containing a CMake configuration file for Geant4.
 Geant4_DIR:PATH=/usr/local/lib/Geant4-10.7.4
+
+//FindGeant4.cmake was successful
+Geant4_FOUND:BOOL=TRUE
 
 //Path to a file.
 OPENGL_EGL_INCLUDE_DIR:PATH=/usr/include
@@ -282,10 +285,10 @@ PKG_CONFIG_EXECUTABLE:FILEPATH=/usr/bin/pkg-config
 PTL_DIR:PATH=/usr/local/lib/Geant4-10.7.4/PTL
 
 //Path to a library.
-QHCPP_LIBRARY:FILEPATH=/opt/cdms/release/lib/libqhullcpp.so
+QHCPP_LIBRARY:FILEPATH=/sdf/home/s/shilin/mycode/TFR/G4CMP_install/lib/libqhullcpp.so
 
 //Path to a library.
-QH_P_LIBRARY:FILEPATH=/opt/cdms/release/lib/libqhull_p.so
+QH_P_LIBRARY:FILEPATH=/sdf/home/s/shilin/mycode/TFR/G4CMP_install/lib/libqhull_p.so
 
 //The directory containing a CMake configuration file for Qt5Core.
 Qt5Core_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/Qt5Core

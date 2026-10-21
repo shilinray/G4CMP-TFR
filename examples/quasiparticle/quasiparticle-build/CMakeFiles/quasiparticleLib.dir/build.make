@@ -252,9 +252,9 @@ libg4cmpQuasiparticle.so: CMakeFiles/quasiparticleLib.dir/src/QuasiparticlePad.c
 libg4cmpQuasiparticle.so: CMakeFiles/quasiparticleLib.dir/src/QuasiparticleTransmissionLine.cc.o
 libg4cmpQuasiparticle.so: CMakeFiles/quasiparticleLib.dir/src/QuasiparticleResonatorAssembly.cc.o
 libg4cmpQuasiparticle.so: CMakeFiles/quasiparticleLib.dir/build.make
-libg4cmpQuasiparticle.so: /opt/cdms/release/lib/libG4cmp.so
-libg4cmpQuasiparticle.so: /opt/cdms/release/lib/libqhullcpp.so
-libg4cmpQuasiparticle.so: /opt/cdms/release/lib/libqhull_p.so
+libg4cmpQuasiparticle.so: /sdf/home/s/shilin/mycode/TFR/G4CMP_install/lib/libG4cmp.so
+libg4cmpQuasiparticle.so: /sdf/home/s/shilin/mycode/TFR/G4CMP_install/lib/libqhullcpp.so
+libg4cmpQuasiparticle.so: /sdf/home/s/shilin/mycode/TFR/G4CMP_install/lib/libqhull_p.so
 libg4cmpQuasiparticle.so: /usr/local/lib/libG4Tree.so
 libg4cmpQuasiparticle.so: /usr/local/lib/libG4FR.so
 libg4cmpQuasiparticle.so: /usr/local/lib/libG4GMocren.so

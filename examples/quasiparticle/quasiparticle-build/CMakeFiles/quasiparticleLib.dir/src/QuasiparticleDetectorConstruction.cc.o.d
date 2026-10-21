@@ -239,9 +239,9 @@ CMakeFiles/quasiparticleLib.dir/src/QuasiparticleDetectorConstruction.cc.o: \
  /usr/include/c++/11/bits/parse_numbers.h \
  /usr/include/c++/11/bits/std_mutex.h \
  /usr/include/c++/11/bits/unique_lock.h \
- /opt/cdms/release/cmake/../include/G4CMP/G4LatticeLogical.hh \
+ /sdf/home/s/shilin/mycode/TFR/G4CMP_install/cmake/../include/G4CMP/G4LatticeLogical.hh \
  /usr/local/include/Geant4/globals.hh \
- /opt/cdms/release/cmake/../include/G4CMP/G4CMPCrystalGroup.hh \
+ /sdf/home/s/shilin/mycode/TFR/G4CMP_install/cmake/../include/G4CMP/G4CMPCrystalGroup.hh \
  /usr/local/include/Geant4/G4ThreeVector.hh \
  /usr/local/include/Geant4/CLHEP/Vector/ThreeVector.h \
  /usr/local/include/Geant4/CLHEP/Utility/defs.h \
@@ -264,8 +264,8 @@ CMakeFiles/quasiparticleLib.dir/src/QuasiparticleDetectorConstruction.cc.o: \
  /usr/local/include/Geant4/CLHEP/Vector/RotationZ.h \
  /usr/local/include/Geant4/CLHEP/Vector/RotationZ.icc \
  /usr/local/include/Geant4/CLHEP/Vector/Rotation.icc \
- /opt/cdms/release/cmake/../include/G4CMP/G4PhononPolarization.hh \
- /opt/cdms/release/cmake/../include/G4CMP/G4CMPSurfaceProperty.hh \
+ /sdf/home/s/shilin/mycode/TFR/G4CMP_install/cmake/../include/G4CMP/G4PhononPolarization.hh \
+ /sdf/home/s/shilin/mycode/TFR/G4CMP_install/cmake/../include/G4CMP/G4CMPSurfaceProperty.hh \
  /usr/local/include/Geant4/G4SurfaceProperty.hh \
  /usr/local/include/Geant4/G4MaterialPropertiesTable.hh \
  /usr/local/include/Geant4/G4MaterialPropertiesIndex.hh \
@@ -280,7 +280,7 @@ CMakeFiles/quasiparticleLib.dir/src/QuasiparticleDetectorConstruction.cc.o: \
  /usr/local/include/Geant4/G4MaterialPropertiesTable.icc \
  /sdf/home/s/shilin/mycode/TFR/G4CMP/examples/quasiparticle/include/QuasiparticleDetectorParameters.hh \
  /sdf/home/s/shilin/mycode/TFR/G4CMP/examples/quasiparticle/include/QuasiparticleSensitivity.hh \
- /opt/cdms/release/cmake/../include/G4CMP/G4CMPElectrodeSensitivity.hh \
+ /sdf/home/s/shilin/mycode/TFR/G4CMP_install/cmake/../include/G4CMP/G4CMPElectrodeSensitivity.hh \
  /usr/local/include/Geant4/G4VSensitiveDetector.hh \
  /usr/local/include/Geant4/G4VHit.hh /usr/local/include/Geant4/G4Step.hh \
  /usr/include/c++/11/stdlib.h \
@@ -384,7 +384,7 @@ CMakeFiles/quasiparticleLib.dir/src/QuasiparticleDetectorConstruction.cc.o: \
  /usr/local/include/Geant4/G4TouchableHistory.icc \
  /usr/local/include/Geant4/G4CollectionNameVector.hh \
  /usr/local/include/Geant4/G4VSDFilter.hh \
- /opt/cdms/release/cmake/../include/G4CMP/G4CMPElectrodeHit.hh \
+ /sdf/home/s/shilin/mycode/TFR/G4CMP_install/cmake/../include/G4CMP/G4CMPElectrodeHit.hh \
  /usr/local/include/Geant4/G4VHit.hh \
  /usr/local/include/Geant4/G4THitsCollection.hh \
  /usr/local/include/Geant4/G4Allocator.hh \
@@ -398,18 +398,20 @@ CMakeFiles/quasiparticleLib.dir/src/QuasiparticleDetectorConstruction.cc.o: \
  /usr/local/include/Geant4/G4VSolid.icc \
  /usr/local/include/Geant4/G4BooleanSolid.icc \
  /sdf/home/s/shilin/mycode/TFR/G4CMP/examples/quasiparticle/include/QuasiparticlePad.hh \
- /opt/cdms/release/cmake/../include/G4CMP/G4LatticeManager.hh \
+ /sdf/home/s/shilin/mycode/TFR/G4CMP_install/cmake/../include/G4CMP/G4LatticeManager.hh \
  /sdf/home/s/shilin/mycode/TFR/G4CMP/examples/quasiparticle/include/QuasiparticleResonatorAssembly.hh \
- /opt/cdms/release/cmake/../include/G4CMP/G4LatticePhysical.hh \
- /opt/cdms/release/cmake/../include/G4CMP/G4LatticeLogical.hh \
- /opt/cdms/release/cmake/../include/G4CMP/G4CMPLogicalBorderSurface.hh \
+ /sdf/home/s/shilin/mycode/TFR/G4CMP_install/cmake/../include/G4CMP/G4LatticePhysical.hh \
+ /sdf/home/s/shilin/mycode/TFR/G4CMP_install/cmake/../include/G4CMP/G4LatticeLogical.hh \
+ /sdf/home/s/shilin/mycode/TFR/G4CMP_install/cmake/../include/G4CMP/G4CMPLogicalBorderSurface.hh \
  /usr/local/include/Geant4/G4LogicalSurface.hh \
  /usr/local/include/Geant4/G4LogicalSurface.icc \
- /opt/cdms/release/cmake/../include/G4CMP/G4CMPPhononElectrode.hh \
- /opt/cdms/release/cmake/../include/G4CMP/G4CMPVElectrodePattern.hh \
- /opt/cdms/release/cmake/../include/G4CMP/G4CMPProcessUtils.hh \
+ /sdf/home/s/shilin/mycode/TFR/G4CMP_install/cmake/../include/G4CMP/G4CMPPhononElectrode.hh \
+ /sdf/home/s/shilin/mycode/TFR/G4CMP_install/cmake/../include/G4CMP/G4CMPVElectrodePattern.hh \
+ /sdf/home/s/shilin/mycode/TFR/G4CMP_install/cmake/../include/G4CMP/G4CMPProcessUtils.hh \
  /usr/local/include/Geant4/G4AffineTransform.hh \
- /usr/local/include/Geant4/G4Track.hh /usr/local/include/Geant4/G4Box.hh \
+ /usr/local/include/Geant4/G4Track.hh \
+ /usr/local/include/Geant4/G4VTouchable.hh \
+ /usr/local/include/Geant4/G4Box.hh \
  /usr/local/include/Geant4/G4GeomTypes.hh \
  /usr/local/include/Geant4/G4GeomConfig.hh \
  /usr/local/include/Geant4/G4CSGSolid.hh \

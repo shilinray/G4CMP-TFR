@@ -93,9 +93,9 @@ g4cmpQuasiparticle_EXTERNAL_OBJECTS =
 g4cmpQuasiparticle: CMakeFiles/g4cmpQuasiparticle.dir/g4cmpQuasiparticle.cc.o
 g4cmpQuasiparticle: CMakeFiles/g4cmpQuasiparticle.dir/build.make
 g4cmpQuasiparticle: libg4cmpQuasiparticle.so
-g4cmpQuasiparticle: /opt/cdms/release/lib/libG4cmp.so
-g4cmpQuasiparticle: /opt/cdms/release/lib/libqhullcpp.so
-g4cmpQuasiparticle: /opt/cdms/release/lib/libqhull_p.so
+g4cmpQuasiparticle: /sdf/home/s/shilin/mycode/TFR/G4CMP_install/lib/libG4cmp.so
+g4cmpQuasiparticle: /sdf/home/s/shilin/mycode/TFR/G4CMP_install/lib/libqhullcpp.so
+g4cmpQuasiparticle: /sdf/home/s/shilin/mycode/TFR/G4CMP_install/lib/libqhull_p.so
 g4cmpQuasiparticle: /usr/local/lib/libG4Tree.so
 g4cmpQuasiparticle: /usr/local/lib/libG4FR.so
 g4cmpQuasiparticle: /usr/local/lib/libG4GMocren.so

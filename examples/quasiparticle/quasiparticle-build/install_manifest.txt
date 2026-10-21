@@ -1,0 +1,2 @@
+/sdf/home/s/shilin/mycode/TFR/G4CMP/examples/quasiparticle/quasiparticle-install/lib/libg4cmpQuasiparticle.so
+/sdf/home/s/shilin/mycode/TFR/G4CMP/examples/quasiparticle/quasiparticle-install/bin/g4cmpQuasiparticle

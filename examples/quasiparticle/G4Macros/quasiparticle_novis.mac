@@ -1,0 +1,48 @@
+#-------------------------------------
+# quasiparticle_novis.mac
+#
+# Same event as quasiparticle_geometry_vis.mac, but with no
+# visualization (no display needed). Prints verbose tracking output.
+# Run in batch mode:  ./g4cmpQuasiparticle <path>/quasiparticle_novis.mac > tracking.log
+#-------------------------------------
+
+/run/initialize
+/run/printProgress 1
+
+/tracking/verbose 2
+
+# Toggle phononBounces depending on whether
+# you want to see a full event or not.
+/g4cmp/phononBounces 100
+/g4cmp/qpBounces 1000000000
+
+#/process/inactivate phononScattering
+#/process/inactivate phononDownconversion
+/process/inactivate phononPolycrystalElasticScattering
+#/process/inactivate qpRecombination
+#/process/inactivate qpRadiatesPhonon
+#/process/inactivate scPairBreaking
+#/process/inactivate qpDiffusion 
+#/process/inactivate qpLocalTrapping
+#/process/inactivate qpDiffusionTimeStepper
+
+# Generate 1 phonon per event. Place right under the Nb film
+/gps/number 1
+/gps/particle phononTF
+/gps/pos/type Volume
+/gps/pos/shape Para
+/gps/pos/centre -2.09302 1.0 4.900 mm
+
+# Very small (10nm) half-dimension box
+/gps/pos/halfx 0.00001 mm
+/gps/pos/halfy 0.00001 mm
+/gps/pos/halfz 0.00001 mm
+
+/random/setSeeds 123456 567890
+
+# Spawn phonons with 4 meV in random directions (isotropically)
+/gps/ang/type iso
+/gps/ene/type Mono
+/gps/energy 0.0040 eV
+/run/beamOn 1
+
