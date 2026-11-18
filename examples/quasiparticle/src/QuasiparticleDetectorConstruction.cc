@@ -50,7 +50,10 @@ QuasiparticleDetectorConstruction::QuasiparticleDetectorConstruction()
     fNiobium(0), fWorldPhys(0), topSurfProp(0), topSurfProp2(0), vacSurfProp(0),
     wallSurfProp(0), copTopSurfProp(0), copTopSurfProp2(0), alNbSurfProp(0),
     fConstructed(false), fVacVacInterface(0), fAlVacInterface(0), fAlAlInterface(0),
-    fSiAlInterface(0), fSiCuInterface(0), fSiVacInterface(0), fCuVacInterface(0) {;}
+    fSiAlInterface(0), fSiCuInterface(0), fSiVacInterface(0), fCuVacInterface(0),
+    fAir(0), fVacuum(0), fSiNbInterface(0), fNbVacInterface(0), fNbNbInterface(0),
+    fAlNbInterface(0), fSiSideWallInterface(0), fSiPolishedWallInterface(0),
+    fSuperconductorSensitivity(0) {;}
 
 
 QuasiparticleDetectorConstruction::~QuasiparticleDetectorConstruction() {

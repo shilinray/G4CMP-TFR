@@ -21,20 +21,32 @@
 #include "G4StepPoint.hh"
 #include "G4CMPVTrackInfo.hh"
 #include "G4CMPTrackUtils.hh"
+#include "QuasiparticleConfigManager.hh"
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 //Default constructor
 QuasiparticleSteppingAction::QuasiparticleSteppingAction() {
-  //Upon construction of this class, create a txt file with step information 
-  fOutputFile.open("QuasiparticleStepInformationFile.txt",std::ios::trunc);
+  // The step file is no longer opened here: this constructor runs in main()
+  // (G4VUserActionInitialization::Build) BEFORE any macro is read, so the
+  // user could not yet have issued /g4cmp/stepOutput false. The file is
+  // opened on the first step instead (see UserSteppingAction).
 }
 
 QuasiparticleSteppingAction::~QuasiparticleSteppingAction() {
-  fOutputFile.close();
+  if (fOutputFile.is_open()) fOutputFile.close();
 }
 
 //Alternative constructor
 void QuasiparticleSteppingAction::UserSteppingAction(const G4Step* step) {
+
+  // /g4cmp/stepOutput false  ->  skip the (very large) QP step file. This is
+  // intended for the lQPD_Nb statistics scans (10^4 events/job).
+  if (!QuasiparticleConfigManager::GetStepOutput()) return;
+
+  //Upon first use, create a txt file with step information
+  if (!fOutputFile.is_open()) {
+    fOutputFile.open("QuasiparticleStepInformationFile.txt",std::ios::trunc);
+  }
 
   //First up: do generic exporting of step information (no cuts made here)
   ExportStepInformation(step);

@@ -36,6 +36,37 @@ namespace QuasiparticleDetectorParameters
   constexpr double dp_scDn_Al = 6 * CLHEP::um*CLHEP::um / CLHEP::ns;
   constexpr double dp_scTauQPTrap_Al = 0.2 * CLHEP::ms;
 
+  //Niobium superconductor info (used by the lQPD_Nb geometry, i.e.
+  //QuasiparticleDetectorConstruction_lQPD_Nb.cc).
+  //NOTE: The gap (1538 ueV) is the same value that the G4CMP/Kaplan version of
+  //lQPD_Nb used as "gapEnergy" for Nb. The characteristic QP/phonon lifetimes
+  //(sc_tau0_qp, sc_tau0_ph) are NOT here: they live in CrystalMaps/Nb/config.txt
+  //(0.149 ns and 0.00417 ns, the same Kaplan numbers as the old
+  //"phononLifetime 4.17 ps"). The remaining numbers below were NOT part of the
+  //Kaplan model, so they are best-guess placeholders (same as Al where there is
+  //no better information) and should be tuned/validated before quoting results.
+  constexpr double dp_polycryElScatMFP_Nb = 10 * CLHEP::nm;
+  constexpr double dp_scDelta0_Nb = 0.001538 * CLHEP::eV;
+  constexpr double dp_scTeff_Nb = 0.2 * CLHEP::kelvin;
+  constexpr double dp_scDn_Nb = 0.3 * CLHEP::um*CLHEP::um / CLHEP::ns; //placeholder (~3 cm^2/s)
+  constexpr double dp_scTauQPTrap_Nb = 0.2 * CLHEP::ms;
+
+  //----------------------------------------------------------------
+  //lQPD_Nb geometry parameters (TFR port of the RISQTutorial lQPD_Nb device)
+  //Full film thickness used when /g4cmp/filmThicknessAl|Nb is not set (or <= 0).
+  //200 nm is the thickness that the original lQPD_Nb geometry always used for
+  //its metal volumes and for the Nb backplane.
+  constexpr double dp_lQPDDefaultFilmThickness = 200 * CLHEP::nm;
+
+  //Phonon absorption/reflection probabilities at the Si <-> metal-film
+  //interfaces. In the TFR physics a phonon that is neither absorbed nor
+  //reflected is TRANSMITTED into the superconductor (and can then break Cooper
+  //pairs). Both zero = every phonon that reaches the film enters it (same as
+  //the Si/Al interface of the resonator example). Raise dp_lQPD_pReflProbSiFilm
+  //to emulate an acoustic mismatch (transmission = 1 - pAbs - pRefl).
+  constexpr double dp_lQPD_pAbsProbSiFilm = 0.0;
+  constexpr double dp_lQPD_pReflProbSiFilm = 0.0;
+
   
   //----------------------------------------------------------------
   //Silicon chip dimensions

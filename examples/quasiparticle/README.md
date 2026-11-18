@@ -650,3 +650,25 @@ And with that, we'll conclude with a handful of homework problems for particular
 > [!TIP]
 > Challenge question: for QPs produced in the middle of the CPW resonator, what's a technique that you can add to the existing script to test the accuracy of the diffusion through the CPW? 
 
+## Extra Example: the lQPD_Nb Quasiparticle Detector (macro-driven scans)
+
+This example also contains a TFR port of the `lQPD_Nb` geometry from the RISQTutorial example of regular G4CMP: a quasiparticle detector (coupling capacitor, meandered inductor, interdigitated capacitor, a small Al junction and half-disk absorber) on a Si chip, with an Nb backplane. It is built instead of the resonator chip with
+
+```
+cmake -DCMAKE_INSTALL_PREFIX=/path/to/quasiparticle-lQPD_Nb-install -DCMAKE_CXX_STANDARD=17 -DQUASIPARTICLE_GEOMETRY=lQPD_Nb ../quasiparticle/
+```
+
+(`QUASIPARTICLE_GEOMETRY` is `resonator` by default; the source is `src/QuasiparticleDetectorConstruction_lQPD_Nb.cc`, which carries detailed comments on every difference from the regular-G4CMP file.) The main differences are: the metal is now made of real superconducting volumes (own `G4LatticePhysical`, two-way Si/film, film/film and film/vacuum boundaries) instead of Kaplan "electrodes", and the Nb parameters used for the Nb films and backplane (`dp_*_Nb` in `QuasiparticleDetectorParameters.hh`) are placeholders that should be validated.
+
+The geometry and output are controlled from macros (all `/g4cmp/` commands must be issued before `/run/initialize`):
+
+| Command | Meaning |
+| ------- | ------- |
+| `/g4cmp/numsensors N` | chip half-width = 0.5 cm / sqrt(N) |
+| `/g4cmp/Al true\|false` | patterned film is Al (true) or Nb (false); the junction/absorber is always Al |
+| `/g4cmp/filmThicknessAl X`, `/g4cmp/filmThicknessNb X` | film thickness in nm (<= 0: 200 nm). All top-side films share one thickness (the Al value if `Al` is true, otherwise the Nb value); the Nb backplane always uses the Nb value |
+| `/g4cmp/pAbsProbSideWallSi p`, `/g4cmp/pAbsProbPolishedWallSi p` | phonon absorption probability on the Si side walls / polished faces |
+| `/g4cmp/primFileName f`, `/g4cmp/hitsFileName f` | primary and hit output files (positions in mm, times in ns, energies in eV) |
+| `/g4cmp/stepOutput false` | do not write `QuasiparticleStepInformationFile.txt` (recommended for scans) |
+
+A "hit" is a phonon that the boundary process lets enter a junction/absorber ("shunt") volume (first entry per track), or that is absorbed there; `Energy Deposited` is the phonon energy at entry. `G4Macros/pceStudy.mac` and `G4Macros/memsStudy.mac` are the base macros, and the `run_*.sh` / `*.sh` scripts (SLURM) fill them in with `sed`. `AnalysisTools/RISQTutorialAnalysis_lQPD_Nb.cc` reads the two output files.

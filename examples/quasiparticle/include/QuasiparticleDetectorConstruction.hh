@@ -20,7 +20,7 @@
 class G4Material;
 class G4VPhysicalVolume;
 class G4CMPSurfaceProperty;
-
+class QuasiparticleSensitivity;	// Used only by the lQPD_Nb geometry
 
 class QuasiparticleDetectorConstruction : public G4VUserDetectorConstruction {
 public:
@@ -65,6 +65,30 @@ private:
   G4CMPSurfaceProperty* fSiCuInterface;
   G4CMPSurfaceProperty* fSiVacInterface;
   G4CMPSurfaceProperty* fCuVacInterface;
+
+  //--------------------------------------------------------------------------
+  // Members added for the lQPD_Nb geometry
+  // (QuasiparticleDetectorConstruction_lQPD_Nb.cc, selected with the CMake
+  // option -DQUASIPARTICLE_GEOMETRY=lQPD_Nb). They are unused (and stay null)
+  // by the resonator geometry in QuasiparticleDetectorConstruction.cc.
+  //--------------------------------------------------------------------------
+  G4Material* fAir;		// Air boxes next to the Si side walls
+  G4Material* fVacuum;		// World material (true vacuum)
+
+  // Extra interfaces needed once the patterned film can be Nb as well as Al
+  // (the G4CMP/Kaplan version had NbSurfProp/AlSurfProp for the same purpose)
+  G4CMPSurfaceProperty* fSiNbInterface;	// Si <-> Nb (patterned film or backplane)
+  G4CMPSurfaceProperty* fNbVacInterface;	// Nb <-> vacuum
+  G4CMPSurfaceProperty* fNbNbInterface;	// Nb <-> Nb (touching Nb volumes)
+  G4CMPSurfaceProperty* fAlNbInterface;	// Al <-> Nb (touching Al and Nb volumes)
+
+  // Bare-silicon surfaces; absorption set by /g4cmp/pAbsProbSideWallSi and
+  // /g4cmp/pAbsProbPolishedWallSi (ported from RISQTutorial)
+  G4CMPSurfaceProperty* fSiSideWallInterface;
+  G4CMPSurfaceProperty* fSiPolishedWallInterface;
+
+  // Sensitive detector that writes the primary and hit text files
+  QuasiparticleSensitivity* fSuperconductorSensitivity;
 };
 
 #endif

@@ -1,0 +1,47 @@
+/run/numberOfThreads 14
+
+/g4cmp/phononBounces 1000000
+# TFR: maximum number of BogoliubovQP boundary bounces (same value as the
+# other TFR example macros)
+/g4cmp/qpBounces 1000000000
+# TFR: do not write the (huge) QuasiparticleStepInformationFile.txt in scans
+/g4cmp/stepOutput false
+/g4cmp/filmThicknessAl 0
+/g4cmp/filmThicknessNb 0
+/g4cmp/Al false
+/g4cmp/pAbsProbSideWallSi 0.0
+/g4cmp/pAbsProbPolishedWallSi 0.0
+/g4cmp/numsensors 1
+/g4cmp/primFileName
+/g4cmp/hitsFileName
+
+/run/initialize
+/tracking/verbose 0
+/run/printProgress 1000
+
+# TFR: process switches (these commands must come AFTER /run/initialize).
+# Polycrystalline grain-boundary scattering is switched off in every TFR
+# example macro; comment the line out to include it.
+/process/inactivate phononPolycrystalElasticScattering
+#/process/inactivate phononScattering
+#/process/inactivate phononDownconversion
+#/process/inactivate scPairBreaking
+#/process/inactivate qpRecombination
+#/process/inactivate qpRadiatesPhonon
+#/process/inactivate qpDiffusion
+#/process/inactivate qpLocalTrapping
+#/process/inactivate qpDiffusionTimeStepper
+
+# Generate 1 phonon per event from a point on an 8x8 grid across the 1cm x 1cm chip
+/gps/number 1
+/gps/particle phononL
+
+/gps/pos/type Point
+/random/setSeeds 2
+/gps/ang/type iso
+/gps/pos/centre GPS_X GPS_Y 0.0 cm
+
+#Select energies
+/gps/ene/type Mono
+/gps/energy 0.004 eV 
+/run/beamOn 10000
