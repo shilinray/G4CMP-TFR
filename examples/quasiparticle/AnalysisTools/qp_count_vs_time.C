@@ -28,6 +28,7 @@
 //
 // Usage:
 //   root -l -b -q 'qp_count_vs_time.C("QuasiparticleStepInformationFile.txt")'
+//     (the time axis ends when the last QP dies; give tMax in ns to change it)
 //   root -l 'qp_count_vs_time.C("QuasiparticleStepInformationFile.txt", "shunt", 0, 10000, 1000)'
 //   root -l 'qp_count_at_time("QuasiparticleStepInformationFile.txt", 500.)'
 //
@@ -81,16 +82,37 @@ bool QPCVReadStep(std::ifstream& in, QPCVStep& s) {
 }
 
 
+// Latest time at which any QP step in the file ends [ns]; -1 if there is none
+double QPCVLastTime(const char* stepFile) {
+  std::ifstream in(stepFile);
+  if (!in.is_open()) return -1.;
+  double last = -1.;
+  QPCVStep s;
+  while (in.good()) {
+    if (!QPCVReadStep(in, s)) {
+      if (in.eof()) break;
+      in.clear();
+      in.ignore(100000, '\n');
+      continue;
+    }
+    last = std::max(last, s.postT);
+  }
+  return last;
+}
+
+
 // Plot the number of QPs vs time in the volumes whose name contains
 // volumeContains: one histogram per volume plus the total. The bin content is
 // the time-averaged number of QPs present during that bin, per event.
+// If tMax_ns is negative (the default) the time axis ends when the last QP
+// in the file dies, i.e. at the latest time of any QP step.
 // Also prints the energy collected by QPs that reach the gap in those volumes
 // (see the top of the file) and the collection efficiency, and returns them
 // through energyCollected_eV and efficiency if those pointers are given.
 // Returns the histogram of the total (nullptr if the file cannot be read).
 TH1D* qp_count_vs_time(const char* stepFile = "QuasiparticleStepInformationFile.txt",
                        const char* volumeContains = "shunt",
-                       double tMin_ns = 0., double tMax_ns = 10000.,
+                       double tMin_ns = 0., double tMax_ns = -1.,
                        int nBins = 1000, bool perVolume = true,
                        bool logY = false,
                        const char* outFile = "qp_count_vs_time.png",
@@ -104,6 +126,11 @@ TH1D* qp_count_vs_time(const char* stepFile = "QuasiparticleStepInformationFile.
   if (!in.is_open()) {
     std::cerr << "qp_count_vs_time: cannot open " << stepFile << std::endl;
     return nullptr;
+  }
+  if (tMax_ns < 0.) {
+    tMax_ns = QPCVLastTime(stepFile);
+    std::cout << "qp_count_vs_time: last QP step ends at " << tMax_ns
+              << " ns; using it as the end of the time axis" << std::endl;
   }
   if (nBins < 1 || tMax_ns <= tMin_ns) {
     std::cerr << "qp_count_vs_time: bad time range or number of bins" << std::endl;
