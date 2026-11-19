@@ -30,10 +30,16 @@ module list
 BaseMacro="${SLURM_SUBMIT_DIR}/photon_nb_backplane_qpdensity.mac"
 nEvents=1	# one photon per run
 seed=7
+
+# Geometry settings written into the macro copy
+Al_bool=false			# /g4cmp/Al false = Nb patterned film
+Al_z=100			# Al film thickness [nm]
+Nb_z=20				# Nb film thickness [nm] (the backplane stays 200 nm)
+pAbsProbPolishedWallSi=0.01	# phonon absorption on the polished Si faces
 run_dir="${1:-/sdf/home/s/shilin/mycode/photon_run/run_${SLURM_JOB_ID}}"
 
 # The built example; change this (or set G4EXE before sbatch) to your build
-: "${G4EXE:=/sdf/home/s/shilin/mycode/TFR/G4CMP-TFR/examples/quasiparticle/quasiparticle-lQPD_Nb-build/g4cmpQuasiparticle}"
+: "${G4EXE:=/sdf/home/s/shilin/mycode/TFR/G4CMP/examples/quasiparticle/quasiparticle-install/bin/g4cmpQuasiparticle}"
 
 # G4CMP environment (only set when not already set in your shell)
 : "${G4CMPINSTALL:=/sdf/home/s/shilin/mycode/TFR/G4CMP_install/share/G4CMP}"
@@ -69,10 +75,18 @@ echo "Run dir:     $run_dir"
 echo "Executable:  $G4EXE"
 echo "Events:      $nEvents"
 echo "Seed:        $seed"
+echo "Al bool:     $Al_bool"
+echo "Al thickness: $Al_z nm"
+echo "Nb thickness: $Nb_z nm"
+echo "pAbsProbPolishedWallSi: $pAbsProbPolishedWallSi"
 
 cp "$BaseMacro" "$mName"
 sed -i "s|^/run/beamOn .*|/run/beamOn ${nEvents}|" "$mName"
 sed -i "s|^/random/setSeeds .*|/random/setSeeds ${seed} $((seed + 1))|" "$mName"
+sed -i "s|^/g4cmp/Al .*|/g4cmp/Al ${Al_bool}|" "$mName"
+sed -i "s|^/g4cmp/filmThicknessAl .*|/g4cmp/filmThicknessAl ${Al_z}|" "$mName"
+sed -i "s|^/g4cmp/filmThicknessNb .*|/g4cmp/filmThicknessNb ${Nb_z}|" "$mName"
+sed -i "s|^/g4cmp/pAbsProbPolishedWallSi .*|/g4cmp/pAbsProbPolishedWallSi ${pAbsProbPolishedWallSi}|" "$mName"
 
 # The output files (photon_primary.txt, photon_hits.txt and the QP step file)
 # are written to the working directory
