@@ -13,9 +13,8 @@
 # 2 QPs of 2.895 meV) as a SLURM job.
 #
 # Submit from the G4Macros directory:
-#   sbatch photon.sh [nEvents] [seed] [run_dir]
-# e.g.
-#   sbatch photon.sh 100 7
+#   sbatch photon.sh [run_dir]
+# One photon (one event) with the random seed fixed to 7.
 #
 # Everything the job writes (the macro copy, the QP step file, the hit and
 # primary files, the log) goes into its own run directory, because the QP step
@@ -29,9 +28,9 @@ module load scdms/V05-02 || echo "WARNING: could not load module scdms/V05-02; c
 module list
 
 BaseMacro="${SLURM_SUBMIT_DIR}/photon_nb_backplane_qpdensity.mac"
-nEvents="${1:-1}"
-seed="${2:-123456}"
-run_dir="${3:-/sdf/home/s/shilin/mycode/photon_run/run_${SLURM_JOB_ID}}"
+nEvents=1	# one photon per run
+seed=7
+run_dir="${1:-/sdf/home/s/shilin/mycode/photon_run/run_${SLURM_JOB_ID}}"
 
 # The built example; change this (or set G4EXE before sbatch) to your build
 : "${G4EXE:=/sdf/home/s/shilin/mycode/TFR/G4CMP-TFR/examples/quasiparticle/quasiparticle-lQPD_Nb-build/g4cmpQuasiparticle}"
@@ -79,7 +78,11 @@ sed -i "s|^/random/setSeeds .*|/random/setSeeds ${seed} $((seed + 1))|" "$mName"
 # are written to the working directory
 cd "$run_dir" || exit 1
 
+# The container puts its own G4CMP (/opt/cdms/release/lib) ahead of any
+# LD_LIBRARY_PATH exported outside, so set the path inside the container, right
+# before the program starts, to use the G4CMP install
 apptainer exec /sdf/group/supercdms/software/releases/cdmsfull_V05-02.sif \
+  env LD_LIBRARY_PATH="$G4CMPLIB:$LD_LIBRARY_PATH" \
   "$G4EXE" "$mName" > "$run_dir/photon.log" 2>&1
 
 echo "Done. Step file: $run_dir/QuasiparticleStepInformationFile.txt"
