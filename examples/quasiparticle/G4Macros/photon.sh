@@ -5,7 +5,7 @@
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem-per-cpu=8192
-#SBATCH --time=0-08:00:00
+#SBATCH --time=0-00:10:00
 #SBATCH --gpus 0
 #SBATCH --output=slurm-photon-%j.out
 
@@ -92,11 +92,14 @@ sed -i "s|^/g4cmp/pAbsProbPolishedWallSi .*|/g4cmp/pAbsProbPolishedWallSi ${pAbs
 # are written to the working directory
 cd "$run_dir" || exit 1
 
-# The container puts its own G4CMP (/opt/cdms/release/lib) ahead of any
-# LD_LIBRARY_PATH exported outside, so set the path inside the container, right
-# before the program starts, to use the G4CMP install
+# The container sets its own G4CMP library path and CrystalMaps location, and
+# they win over anything exported outside. Set them inside the container, right
+# before the program starts, so the G4CMP install and its CrystalMaps are used
+echo "Container default G4LATTICEDATA: $(apptainer exec /sdf/group/supercdms/software/releases/cdmsfull_V05-02.sif printenv G4LATTICEDATA)"
+echo "Using G4LATTICEDATA:             $G4LATTICEDATA"
 apptainer exec /sdf/group/supercdms/software/releases/cdmsfull_V05-02.sif \
   env LD_LIBRARY_PATH="$G4CMPLIB:$LD_LIBRARY_PATH" \
+      G4LATTICEDATA="$G4LATTICEDATA" G4CMPINSTALL="$G4CMPINSTALL" \
   "$G4EXE" "$mName" > "$run_dir/photon.log" 2>&1
 
 echo "Done. Step file: $run_dir/QuasiparticleStepInformationFile.txt"
