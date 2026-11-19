@@ -5,7 +5,7 @@
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem-per-cpu=8192
-#SBATCH --time=0-00:10:00
+#SBATCH --time=0-00:20:00
 #SBATCH --gpus 0
 #SBATCH --output=slurm-photon-%j.out
 
@@ -28,7 +28,7 @@ module load scdms/V05-02 || echo "WARNING: could not load module scdms/V05-02; c
 module list
 
 BaseMacro="${SLURM_SUBMIT_DIR}/photon_nb_backplane_qpdensity.mac"
-nEvents=1	# one photon per run
+nEvents=100	# one photon per run
 seed=7
 
 # Geometry settings written into the macro copy
