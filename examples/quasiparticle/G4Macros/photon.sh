@@ -23,8 +23,9 @@
 # working directory. Afterwards, in that directory:
 #   root -l -b -q '<path>/AnalysisTools/qp_count_vs_time.C("QuasiparticleStepInformationFile.txt")'
 
-# load SCDMS singularity image module
-module load scdms/V05-02
+# The SCDMS module is not visible in every batch environment; apptainer is run
+# below with the full path of the image, so a missing module is not fatal
+module load scdms/V05-02 || echo "WARNING: could not load module scdms/V05-02; continuing"
 module list
 
 BaseMacro="${SLURM_SUBMIT_DIR}/photon_nb_backplane_qpdensity.mac"
@@ -49,7 +50,14 @@ then
 fi
 if [ ! -f "$G4EXE" ]
 then
-    echo "Cannot find the executable $G4EXE: set G4EXE or edit this script"
+    echo "Cannot find the executable $G4EXE"
+    echo "Set G4EXE before sbatch (export G4EXE=/path/to/g4cmpQuasiparticle) or edit this script."
+    echo "Find your build with:  find /sdf/home/s/shilin/mycode -name g4cmpQuasiparticle -type f"
+    exit 1
+fi
+if ! command -v apptainer > /dev/null
+then
+    echo "apptainer is not available in this job"
     exit 1
 fi
 
