@@ -48,32 +48,11 @@ endif()
 #----------------------------------------------------------------------------
 # Build stuff
 #
-# Select which detector geometry is compiled. Both files implement the class
-# QuasiparticleDetectorConstruction, so exactly ONE of them goes in the library:
-#   resonator (default): the original six-resonator qubit chip tutorial
-#   lQPD_Nb            : TFR port of the RISQTutorial lQPD_Nb quasiparticle
-#                        detector (macro-driven; see G4Macros/*.mac, *.sh)
-# Usage:  cmake -DQUASIPARTICLE_GEOMETRY=lQPD_Nb ...
-set(QUASIPARTICLE_GEOMETRY "resonator" CACHE STRING
-    "Detector geometry to build: resonator or lQPD_Nb")
-set_property(CACHE QUASIPARTICLE_GEOMETRY PROPERTY STRINGS resonator lQPD_Nb)
-
-if(QUASIPARTICLE_GEOMETRY STREQUAL "resonator")
-    set(quasiparticle_DETECTOR_SOURCE
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/QuasiparticleDetectorConstruction.cc)
-elseif(QUASIPARTICLE_GEOMETRY STREQUAL "lQPD_Nb")
-    set(quasiparticle_DETECTOR_SOURCE
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/QuasiparticleDetectorConstruction_lQPD_Nb.cc)
-else()
-    message(FATAL_ERROR "QUASIPARTICLE_GEOMETRY must be 'resonator' or 'lQPD_Nb' (got '${QUASIPARTICLE_GEOMETRY}')")
-endif()
-message(STATUS "Quasiparticle example geometry: ${QUASIPARTICLE_GEOMETRY}")
-
 set(quasiparticle_SOURCES 
     ${CMAKE_CURRENT_SOURCE_DIR}/src/QuasiparticleActionInitialization.cc 
     ${CMAKE_CURRENT_SOURCE_DIR}/src/QuasiparticleConfigManager.cc 
     ${CMAKE_CURRENT_SOURCE_DIR}/src/QuasiparticleConfigMessenger.cc 
-    ${quasiparticle_DETECTOR_SOURCE}
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/QuasiparticleDetectorConstruction.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/src/QuasiparticlePrimaryGeneratorAction.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/src/QuasiparticleSensitivity.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/src/QuasiparticleSteppingAction.cc
