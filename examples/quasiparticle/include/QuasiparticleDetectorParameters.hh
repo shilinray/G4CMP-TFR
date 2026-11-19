@@ -30,7 +30,7 @@ namespace QuasiparticleDetectorParameters
 
   //----------------------------------------------------------------
   //Superconductor info
-  constexpr double dp_polycryElScatMFP_Al = 10 * CLHEP::nm;
+  constexpr double dp_polycryElScatMFP_Al = 30 * CLHEP::nm;
   constexpr double dp_scDelta0_Al = 0.000176 * CLHEP::eV;
   constexpr double dp_scTeff_Al = 0.2 * CLHEP::kelvin;
   constexpr double dp_scDn_Al = 6 * CLHEP::um*CLHEP::um / CLHEP::ns;
@@ -45,7 +45,7 @@ namespace QuasiparticleDetectorParameters
   //"phononLifetime 4.17 ps"). The remaining numbers below were NOT part of the
   //Kaplan model, so they are best-guess placeholders (same as Al where there is
   //no better information) and should be tuned/validated before quoting results.
-  constexpr double dp_polycryElScatMFP_Nb = 10 * CLHEP::nm;
+  constexpr double dp_polycryElScatMFP_Nb = 30 * CLHEP::nm;
   constexpr double dp_scDelta0_Nb = 0.001538 * CLHEP::eV;
   constexpr double dp_scTeff_Nb = 0.2 * CLHEP::kelvin;
   constexpr double dp_scDn_Nb = 0.3 * CLHEP::um*CLHEP::um / CLHEP::ns; //placeholder (~3 cm^2/s)
@@ -55,17 +55,28 @@ namespace QuasiparticleDetectorParameters
   //lQPD_Nb geometry parameters (TFR port of the RISQTutorial lQPD_Nb device)
   //Full film thickness used when /g4cmp/filmThicknessAl|Nb is not set (or <= 0).
   //200 nm is the thickness that the original lQPD_Nb geometry always used for
-  //its metal volumes and for the Nb backplane.
+  //its metal volumes and for the backplane (the backplane is now fixed at
+  //dp_lQPD_nbBackplaneThickness).
   constexpr double dp_lQPDDefaultFilmThickness = 200 * CLHEP::nm;
+
+  //Full thickness of the Nb backplane. Fixed: it does not follow the macro
+  //command /g4cmp/filmThicknessNb (which only sets the thickness of the
+  //patterned film when it is Nb).
+  constexpr double dp_lQPD_nbBackplaneThickness = 200 * CLHEP::nm;
 
   //Phonon absorption/reflection probabilities at the Si <-> metal-film
   //interfaces. In the TFR physics a phonon that is neither absorbed nor
   //reflected is TRANSMITTED into the superconductor (and can then break Cooper
-  //pairs). Both zero = every phonon that reaches the film enters it (same as
-  //the Si/Al interface of the resonator example). Raise dp_lQPD_pReflProbSiFilm
-  //to emulate an acoustic mismatch (transmission = 1 - pAbs - pRefl).
-  constexpr double dp_lQPD_pAbsProbSiFilm = 0.0;
-  constexpr double dp_lQPD_pReflProbSiFilm = 0.0;
+  //pairs). All zero = every phonon that reaches the film enters it (same as
+  //the Si/Al interface of the resonator example). Raise the reflection
+  //probabilities to emulate an acoustic mismatch (transmission =
+  //(1 - pAbs)(1 - pRefl)). The two directions are set independently:
+  //"SiToFilm" is a phonon going from the silicon into the film, "FilmToSi" is
+  //a phonon going from the film back into the silicon.
+  constexpr double dp_lQPD_pAbsProbSiToFilm = 0.0;
+  constexpr double dp_lQPD_pReflProbSiToFilm = 0.0;
+  constexpr double dp_lQPD_pAbsProbFilmToSi = 0.0;
+  constexpr double dp_lQPD_pReflProbFilmToSi = 0.0;
 
   
   //----------------------------------------------------------------

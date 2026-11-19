@@ -87,6 +87,18 @@ private:
   G4CMPSurfaceProperty* fSiSideWallInterface;
   G4CMPSurfaceProperty* fSiPolishedWallInterface;
 
+  // lQPD_Nb surfaces are direction-specific: fXYInterface applies to a track
+  // going from X into Y. The names above are the X -> Y direction; these are
+  // the reverse (Y -> X) ones. Al <-> Al and Nb <-> Nb stay single because
+  // the two sides are the same material.
+  G4CMPSurfaceProperty* fAlSiInterface;		// Al -> Si
+  G4CMPSurfaceProperty* fNbSiInterface;		// Nb -> Si
+  G4CMPSurfaceProperty* fVacAlInterface;	// vacuum -> Al
+  G4CMPSurfaceProperty* fVacNbInterface;	// vacuum -> Nb
+  G4CMPSurfaceProperty* fNbAlInterface;		// Nb -> Al
+  G4CMPSurfaceProperty* fSideWallSiInterface;	// side-wall air -> Si
+  G4CMPSurfaceProperty* fWorldSiInterface;	// world -> Si
+
   // Sensitive detector that writes the primary and hit text files
   QuasiparticleSensitivity* fSuperconductorSensitivity;
 };

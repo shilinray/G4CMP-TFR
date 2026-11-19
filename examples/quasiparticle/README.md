@@ -658,17 +658,19 @@ This example also contains a TFR port of the `lQPD_Nb` geometry from the RISQTut
 cmake -DCMAKE_INSTALL_PREFIX=/path/to/quasiparticle-lQPD_Nb-install -DCMAKE_CXX_STANDARD=17 -DQUASIPARTICLE_GEOMETRY=lQPD_Nb ../quasiparticle/
 ```
 
-(`QUASIPARTICLE_GEOMETRY` is `resonator` by default; the source is `src/QuasiparticleDetectorConstruction_lQPD_Nb.cc`, which carries detailed comments on every difference from the regular-G4CMP file.) The main differences are: the metal is now made of real superconducting volumes (own `G4LatticePhysical`, two-way Si/film, film/film and film/vacuum boundaries) instead of Kaplan "electrodes", and the Nb parameters used for the Nb films and backplane (`dp_*_Nb` in `QuasiparticleDetectorParameters.hh`) are placeholders that should be validated.
+(`QUASIPARTICLE_GEOMETRY` is `resonator` by default; the source is `src/QuasiparticleDetectorConstruction_lQPD_Nb.cc`, which carries detailed comments on every difference from the regular-G4CMP file.) The main differences are: the metal is now made of real superconducting volumes (own `G4LatticePhysical`, two-way Si/film, film/film and film/vacuum boundaries, each direction with its own `G4CMPSurfaceProperty`, e.g. Si→Al and Al→Si; Al/Al and Nb/Nb are single surfaces since both sides are the same material; the Si→film and film→Si phonon absorption/reflection probabilities are `dp_lQPD_*ProbSiToFilm` / `*ProbFilmToSi` in `QuasiparticleDetectorParameters.hh`) instead of Kaplan "electrodes", and the Nb parameters used for the Nb films and backplane (`dp_*_Nb` in `QuasiparticleDetectorParameters.hh`) are placeholders that should be validated.
 
 The geometry and output are controlled from macros (all `/g4cmp/` commands must be issued before `/run/initialize`):
 
 | Command | Meaning |
 | ------- | ------- |
 | `/g4cmp/numsensors N` | chip half-width = 0.5 cm / sqrt(N) |
-| `/g4cmp/Al true\|false` | patterned film is Al (true) or Nb (false); the junction/absorber is always Al |
-| `/g4cmp/filmThicknessAl X`, `/g4cmp/filmThicknessNb X` | film thickness in nm (<= 0: 200 nm). All top-side films share one thickness (the Al value if `Al` is true, otherwise the Nb value); the Nb backplane always uses the Nb value |
+| `/g4cmp/Al true\|false` | patterned film is Al (true) or Nb (false); the junction/absorber ("shunt" volumes) is always Al |
+| `/g4cmp/filmThicknessAl X`, `/g4cmp/filmThicknessNb X` | thickness in nm of the Al / Nb films (<= 0: 200 nm). Each metal has its own thickness: the junction/absorber always uses the Al value; the patterned film uses the value of whichever metal `Al` selects, and the Nb backplane has a fixed 200 nm thickness (`dp_lQPD_nbBackplaneThickness` in `QuasiparticleDetectorParameters.hh`), independent of these commands. Films sit on the Si surface, so mid-planes differ if the thicknesses differ, and a QP (which keeps its z) can only cross into a neighboring film of a different thickness if its z is inside that film |
 | `/g4cmp/pAbsProbSideWallSi p`, `/g4cmp/pAbsProbPolishedWallSi p` | phonon absorption probability on the Si side walls / polished faces |
 | `/g4cmp/primFileName f`, `/g4cmp/hitsFileName f` | primary and hit output files (positions in mm, times in ns, energies in eV) |
 | `/g4cmp/stepOutput false` | do not write `QuasiparticleStepInformationFile.txt` (recommended for scans) |
+
+`G4Macros/photon_nb_backplane_qpdensity.mac` is an example: a 1.4 THz photon (5.79 meV) breaks one Cooper pair at the centre of the Nb backplane, giving two `BogoliubovQP`s of 2.895 meV each. It keeps the step file on, and the ROOT function `qp_count_vs_time()` in `AnalysisTools/qp_count_vs_time.C` reads that file and plots the number of QPs vs time in the volumes with `shunt` in their name (`root -l -b -q 'qp_count_vs_time.C("QuasiparticleStepInformationFile.txt")'`). It also prints the energy collected by QPs that reach the gap energy in those volumes (each QP once, within a tolerance of the gap) and the collection efficiency (collected energy / initial photon energy); the gap, tolerance and initial energy are arguments.
 
 A "hit" is a phonon that the boundary process lets enter a junction/absorber ("shunt") volume (first entry per track), or that is absorbed there; `Energy Deposited` is the phonon energy at entry. `G4Macros/pceStudy.mac` and `G4Macros/memsStudy.mac` are the base macros, and the `run_*.sh` / `*.sh` scripts (SLURM) fill them in with `sed`. `AnalysisTools/RISQTutorialAnalysis_lQPD_Nb.cc` reads the two output files.

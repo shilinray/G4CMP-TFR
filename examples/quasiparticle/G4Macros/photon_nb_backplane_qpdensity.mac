@@ -1,0 +1,79 @@
+#-----------------------------------------------
+# photon_nb_backplane_qpdensity.mac
+#
+# A single 1.4 THz photon is absorbed at the centre of the Nb backplane
+# (lQPD_Nb geometry) and breaks one Cooper pair. The photon energy is
+#     E = h f = 4.135667696e-15 eV s * 1.4e12 Hz = 5.78993 meV
+# (above 2*Delta_Nb = 3.076 meV). The two quasiparticles share it:
+#     2 BogoliubovQPs of E/2 = 2.894967 meV each (above the Nb gap, 1.538 meV)
+# starting at the same point in random directions in the XY plane (QPs only
+# move in XY in G4CMP; the pair-breaking process also creates them in XY).
+#
+# The QP step file (QuasiparticleStepInformationFile.txt, written because
+# /g4cmp/stepOutput is true below) has every QP step with its pre/post-step
+# time and volume. Count the QPs vs time in every volume with "shunt" in its
+# name (junct1..junct5 and the absorber) with the ROOT function in
+# AnalysisTools/qp_count_vs_time.C. The backplane does not touch the shunt films, so
+# the shunt QPs come from phonons: Nb QPs recombine/radiate phonons, those cross
+# the Si, and break Cooper pairs in the Al.
+#
+# Run in batch mode, serial:
+#   ./g4cmpQuasiparticle ../G4Macros/photon_nb_backplane_qpdensity.mac
+#   root -l -b -q '../AnalysisTools/qp_count_vs_time.C("QuasiparticleStepInformationFile.txt")'
+#------------------------------------------
+
+/g4cmp/phononBounces 1000000
+/g4cmp/qpBounces 1000000000
+# The step file can be very large for long-lived QPs
+/g4cmp/stepOutput true
+
+# Geometry (see README, lQPD_Nb): 1 sensor, Al patterned film. The Nb
+# backplane thickness is fixed at 200 nm. 0 = default 200 nm for the films.
+/g4cmp/numsensors 1
+/g4cmp/Al true
+/g4cmp/filmThicknessAl 0
+/g4cmp/filmThicknessNb 0
+/g4cmp/pAbsProbSideWallSi 0.0
+/g4cmp/pAbsProbPolishedWallSi 0.0
+/g4cmp/primFileName photon_primary.txt
+/g4cmp/hitsFileName photon_hits.txt
+
+/run/initialize
+/tracking/verbose 0
+/run/printProgress 1
+
+# Process switches (these commands must come AFTER /run/initialize).
+# Polycrystalline scattering is left ON here (the Al/Nb mean free path is set
+# in QuasiparticleDetectorParameters.hh). The other TFR example macros switch
+# it off; uncomment to do the same.
+#/process/inactivate phononPolycrystalElasticScattering
+#/process/inactivate phononScattering
+#/process/inactivate phononDownconversion
+#/process/inactivate scPairBreaking
+#/process/inactivate qpRecombination
+#/process/inactivate qpRadiatesPhonon
+#/process/inactivate qpDiffusion
+#/process/inactivate qpLocalTrapping
+#/process/inactivate qpDiffusionTimeStepper
+
+/random/setSeeds 123456 567890
+
+# The photon: 2 BogoliubovQPs, E/2 each, at the centre of the backplane.
+# The chip is centred on (0,0); the Si is 100 um thick (z = +-0.05 mm) and the
+# 200 nm Nb backplane sits below it, so its mid-plane is at z = -0.0501 mm.
+/gps/particle BogoliubovQP
+/gps/number 2
+/gps/pos/type Point
+/gps/pos/centre 0.0 0.0 -0.0501 mm
+
+# Random direction in the XY plane (theta = 90 deg means no z component)
+/gps/ang/type iso
+/gps/ang/mintheta 90 deg
+/gps/ang/maxtheta 90 deg
+
+/gps/ene/type Mono
+/gps/energy 0.002894967 eV
+
+# One photon. The analysis function averages over the events in the step file,
+# so raise the number of events to get a smoother curve.
+/run/beamOn 1
